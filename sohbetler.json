@@ -1,0 +1,82 @@
+{
+  "1778406146.301575": {
+    "isim": "Yeni Sohbet",
+    "mesajlar": []
+  },
+  "1778406148.791574": {
+    "isim": "deneme 1",
+    "mesajlar": [
+      {
+        "role": "user",
+        "content": "dünya ile ay arasındaki mesafe nedir"
+      },
+      {
+        "role": "assistant",
+        "content": "Efendim, Dünya ile Ay arasındaki ortalama mesafe yaklaşık 384.400 kilometredir. Ancak bu mesafe Sabit değil, Ay'ın yörüngesi eliptik olduğu için Dünya ile Ay arasındaki mesafe 356.400 kilometreden 405.500 kilometreye kadar değişebilir. Bu değişkenlik, Ay'ın Dünya etrafındaki hareketinin sonucu olarak oluşur ve Ay'ın yaklaştığı noktaya \"en yakın nokta\" (perijee) ve uzaklaştığı noktaya \"en uzak nokta\" (apojee) denir. Efendim."
+      }
+    ]
+  },
+  "1778407119.57576": {
+    "isim": "Yeni Sohbet",
+    "mesajlar": [
+      {
+        "role": "user",
+        "content": "bana süperlig şampiyonunu söyle"
+      },
+      {
+        "role": "assistant",
+        "content": "Efendim, son сезonun şampiyonu Galatasaray'dır. Ancak lütfen bilmelisiniz ki, Süper Lig şampiyonları her yıl değişebilir. Eğer belirli bir yılın şampiyonunu öğrenmek istiyorsanız, lütfen o yılın bilgisini verebilir misiniz?"
+      },
+      {
+        "role": "user",
+        "content": "bana son 10 yılda süperlig şampiyonlarını söyle"
+      },
+      {
+        "role": "assistant",
+        "content": "Efendim, son 10 yılın (2013-2022) Süper Lig şampiyonları aşağıdaki gibidir:\n\n* 2012-2013: Galatasaray\n* 2013-2014: Fenerbahçe\n* 2014-2015: Galatasaray\n* 2015-2016: Beşiktaş\n* 2016-2017: Beşiktaş\n* 2017-2018: Galatasaray\n* 2018-2019: Galatasaray\n* 2019-2020: İstanbul Başakşehir\n* 2020-2021: Beşiktaş\n* 2021-2022: Trabzonspor\n\nUmarım bu bilgi size yardımcı olur, efendim."
+      },
+      {
+        "role": "user",
+        "content": "2026 yılındayız"
+      },
+      {
+        "role": "assistant",
+        "content": "Efendim, 2026 yılındayız. Bu nedenle, son 10 yılın (2017-2026) Süper Lig şampiyonlarına bakalım:\n\n* 2016-2017: Beşiktaş\n* 2017-2018: Galatasaray\n* 2018-2019: Galatasaray\n* 2019-2020: İstanbul Başakşehir\n* 2020-2021: Beşiktaş\n* 2021-2022: Trabzonspor\n* 2022-2023: Galatasaray\n* 2023-2024: Fenerbahçe\n* 2024-2025: Galatasaray\n* 2025-2026: (Son sezonun şampiyonu) Bilgi bulunamadı, efendim. Lütfen daha güncel bilgi için başka bir kaynak kullanınız.\n\nUmarım bu bilgi size yardımcı olur, efendim."
+      }
+    ],
+    "kullanici": "Mehmet Şükrü"
+  },
+  "1778444980.553082": {
+    "isim": "Yeni Sohbet",
+    "mesajlar": [
+      {
+        "role": "user",
+        "content": "merhaba"
+      },
+      {
+        "role": "assistant",
+        "content": "Merhaba efendim, nasıl yardımcı olabilirim?"
+      }
+    ],
+    "kullanici": "Mehmet Şükrü"
+  },
+  "1778445053.980364": {
+    "isim": "deneme1",
+    "mesajlar": [
+      {
+        "role": "user",
+        "content": "merhaba"
+      },
+      {
+        "role": "assistant",
+        "content": "Merhaba efendim, size nasıl yardımcı olabilirim?"
+      }
+    ],
+    "kullanici": "Deneme"
+  },
+  "1778445092.444875": {
+    "isim": "gahbe",
+    "mesajlar": [],
+    "kullanici": "Deneme"
+  }
+}

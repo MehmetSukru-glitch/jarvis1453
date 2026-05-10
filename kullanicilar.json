@@ -1,0 +1,8 @@
+{
+  "Mehmet Şükrü": {
+    "sifre": "scrypt:32768:8:1$WCOJSeUBV7AeGFBB$6e70e5fd37ea05de547795bb181e33e5380c44486aa4a0ab05b7b881aa04c0068e3b5cecefc1ad51e2f8e2b5ebbc8b779ef2814e4c02539a530966deddaf9f36"
+  },
+  "Deneme": {
+    "sifre": "scrypt:32768:8:1$WV6u8CmkXCpyJiPU$bf4266bb249fd70c4e96d09f194498287609d2cb3bac929a98f0dae751eb53d763d584667a70432c99b54502b7a8b99f3d24e00206ed7dd7006fcf41b4b2f3b9"
+  }
+}

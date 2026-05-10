@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>J.A.R.V.İ.S. 1453 — Giriş</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #000; color: #00d4ff; font-family: 'Courier New', monospace; height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .kart { width: 400px; border: 1px solid #00d4ff33; border-radius: 12px; padding: 40px; background: #050a0f; }
+        .logo { font-size: 22px; font-weight: bold; letter-spacing: 4px; text-shadow: 0 0 15px #00d4ff; text-align: center; margin-bottom: 6px; }
+        .logo-alt { font-size: 9px; letter-spacing: 3px; color: #005f73; text-align: center; margin-bottom: 32px; }
+        .arc { width: 60px; height: 60px; border-radius: 50%; border: 2px solid #00d4ff; box-shadow: 0 0 20px #00d4ff; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; animation: don 6s linear infinite; }
+        @keyframes don { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .arc-ic { width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle, #00d4ff, #003d4f); box-shadow: 0 0 12px #00d4ff; animation: parlat 1.5s infinite; }
+        @keyframes parlat { 0%,100% { box-shadow: 0 0 12px #00d4ff; } 50% { box-shadow: 0 0 30px #00d4ff; } }
+        .sekmeler { display: flex; margin-bottom: 24px; border-bottom: 1px solid #00d4ff22; }
+        .sekme { flex: 1; padding: 10px; text-align: center; font-size: 11px; letter-spacing: 2px; cursor: pointer; color: #00d4ff55; transition: all 0.3s; }
+        .sekme.aktif { color: #00d4ff; border-bottom: 2px solid #00d4ff; }
+        input { width: 100%; background: #00d4ff08; border: 1px solid #00d4ff33; color: #00d4ff; padding: 12px 16px; font-family: 'Courier New', monospace; font-size: 13px; border-radius: 6px; outline: none; margin-bottom: 12px; transition: all 0.3s; }
+        input:focus { border-color: #00d4ff; box-shadow: 0 0 10px #00d4ff22; }
+        input::placeholder { color: #00d4ff33; }
+        button { width: 100%; background: transparent; border: 1px solid #00d4ff; color: #00d4ff; padding: 12px; font-family: 'Courier New', monospace; font-size: 12px; cursor: pointer; border-radius: 6px; letter-spacing: 3px; margin-top: 8px; transition: all 0.3s; }
+        button:hover { background: #00d4ff22; box-shadow: 0 0 15px #00d4ff44; }
+        .hata { color: #ff4444; font-size: 12px; text-align: center; margin-top: 10px; min-height: 18px; }
+    </style>
+</head>
+<body>
+    <div class="kart">
+        <div class="arc"><div class="arc-ic"></div></div>
+        <div class="logo">J.A.R.V.İ.S. 1453</div>
+        <div class="logo-alt">STARK INDUSTRIES — KİMLİK DOĞRULAMA</div>
+
+        <div class="sekmeler">
+            <div class="sekme aktif" onclick="sekmeAc('giris')">GİRİŞ</div>
+            <div class="sekme" onclick="sekmeAc('kayit')">KAYIT OL</div>
+        </div>
+
+        <div id="giris-form">
+            <input type="text" id="giris-kullanici" placeholder="Kullanıcı adı">
+            <input type="password" id="giris-sifre" placeholder="Şifre" onkeypress="enterKontrol(event, 'giris')">
+            <button onclick="girisYap()">SİSTEME GİR</button>
+        </div>
+
+        <div id="kayit-form" style="display:none">
+            <input type="text" id="kayit-kullanici" placeholder="Kullanıcı adı">
+            <input type="password" id="kayit-sifre" placeholder="Şifre" onkeypress="enterKontrol(event, 'kayit')">
+            <button onclick="kayitOl()">HESAP OLUŞTUR</button>
+        </div>
+
+        <div class="hata" id="hata"></div>
+    </div>
+
+    <script>
+        function sekmeAc(sekme) {
+            document.querySelectorAll('.sekme').forEach((s, i) => s.classList.toggle('aktif', (i === 0) === (sekme === 'giris')));
+            document.getElementById('giris-form').style.display = sekme === 'giris' ? 'block' : 'none';
+            document.getElementById('kayit-form').style.display = sekme === 'kayit' ? 'block' : 'none';
+            document.getElementById('hata').textContent = '';
+        }
+
+        async function girisYap() {
+            const kullanici_adi = document.getElementById('giris-kullanici').value.trim();
+            const sifre = document.getElementById('giris-sifre').value;
+            if (!kullanici_adi || !sifre) { document.getElementById('hata').textContent = 'Tüm alanları doldurun!'; return; }
+            const res = await fetch('/giris', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({kullanici_adi, sifre})
+            });
+            const veri = await res.json();
+            if (veri.ok) { window.location.href = '/'; }
+            else { document.getElementById('hata').textContent = veri.mesaj; }
+        }
+
+        async function kayitOl() {
+            const kullanici_adi = document.getElementById('kayit-kullanici').value.trim();
+            const sifre = document.getElementById('kayit-sifre').value;
+            if (!kullanici_adi || !sifre) { document.getElementById('hata').textContent = 'Tüm alanları doldurun!'; return; }
+            const res = await fetch('/kayit', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({kullanici_adi, sifre})
+            });
+            const veri = await res.json();
+            if (veri.ok) { window.location.href = '/'; }
+            else { document.getElementById('hata').textContent = veri.mesaj; }
+        }
+
+        function enterKontrol(e, tip) {
+            if (e.key === 'Enter') tip === 'giris' ? girisYap() : kayitOl();
+        }
+    </script>
+</body>
+</html>
