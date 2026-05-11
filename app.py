@@ -6,7 +6,10 @@ import json
 import sys
 from werkzeug.security import generate_password_hash, check_password_hash
 sys.path.append("C:\\Users\\mehme")
-from config import API_KEY, SEHIR, GROQ_KEY
+import os
+API_KEY = os.environ.get("API_KEY")
+SEHIR = os.environ.get("SEHIR")
+GROQ_KEY = os.environ.get("GROQ_KEY")
 from groq import Groq
 
 app = Flask(__name__)
