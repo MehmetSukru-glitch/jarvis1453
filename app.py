@@ -9,7 +9,7 @@ sys.path.append("C:\\Users\\mehme")
 import os
 API_KEY = os.environ.get("API_KEY")
 SEHIR = os.environ.get("SEHIR")
-GROQ_KEY = os.environ.get("GROQ_KEY")
+GROQ_KEY = os.environ.get("GROQ_API_KEY")
 from groq import Groq
 
 app = Flask(__name__)
