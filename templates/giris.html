@@ -29,27 +29,22 @@
         <div class="arc"><div class="arc-ic"></div></div>
         <div class="logo">J.A.R.V.İ.S. 1453</div>
         <div class="logo-alt">STARK INDUSTRIES — KİMLİK DOĞRULAMA</div>
-
         <div class="sekmeler">
             <div class="sekme aktif" onclick="sekmeAc('giris')">GİRİŞ</div>
             <div class="sekme" onclick="sekmeAc('kayit')">KAYIT OL</div>
         </div>
-
         <div id="giris-form">
             <input type="text" id="giris-kullanici" placeholder="Kullanıcı adı">
             <input type="password" id="giris-sifre" placeholder="Şifre" onkeypress="enterKontrol(event, 'giris')">
             <button onclick="girisYap()">SİSTEME GİR</button>
         </div>
-
         <div id="kayit-form" style="display:none">
             <input type="text" id="kayit-kullanici" placeholder="Kullanıcı adı">
             <input type="password" id="kayit-sifre" placeholder="Şifre" onkeypress="enterKontrol(event, 'kayit')">
             <button onclick="kayitOl()">HESAP OLUŞTUR</button>
         </div>
-
         <div class="hata" id="hata"></div>
     </div>
-
     <script>
         function sekmeAc(sekme) {
             document.querySelectorAll('.sekme').forEach((s, i) => s.classList.toggle('aktif', (i === 0) === (sekme === 'giris')));
@@ -57,7 +52,6 @@
             document.getElementById('kayit-form').style.display = sekme === 'kayit' ? 'block' : 'none';
             document.getElementById('hata').textContent = '';
         }
-
         async function girisYap() {
             const kullanici_adi = document.getElementById('giris-kullanici').value.trim();
             const sifre = document.getElementById('giris-sifre').value;
@@ -71,7 +65,6 @@
             if (veri.ok) { window.location.href = '/'; }
             else { document.getElementById('hata').textContent = veri.mesaj; }
         }
-
         async function kayitOl() {
             const kullanici_adi = document.getElementById('kayit-kullanici').value.trim();
             const sifre = document.getElementById('kayit-sifre').value;
@@ -85,7 +78,6 @@
             if (veri.ok) { window.location.href = '/'; }
             else { document.getElementById('hata').textContent = veri.mesaj; }
         }
-
         function enterKontrol(e, tip) {
             if (e.key === 'Enter') tip === 'giris' ? girisYap() : kayitOl();
         }

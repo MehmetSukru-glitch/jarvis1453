@@ -59,24 +59,5 @@
       }
     ],
     "kullanici": "Mehmet Şükrü"
-  },
-  "1778445053.980364": {
-    "isim": "deneme1",
-    "mesajlar": [
-      {
-        "role": "user",
-        "content": "merhaba"
-      },
-      {
-        "role": "assistant",
-        "content": "Merhaba efendim, size nasıl yardımcı olabilirim?"
-      }
-    ],
-    "kullanici": "Deneme"
-  },
-  "1778445092.444875": {
-    "isim": "gahbe",
-    "mesajlar": [],
-    "kullanici": "Deneme"
   }
 }

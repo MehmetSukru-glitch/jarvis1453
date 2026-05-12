@@ -3,17 +3,16 @@ import requests
 import datetime
 import os
 import json
-import sys
 from werkzeug.security import generate_password_hash, check_password_hash
-sys.path.append("C:\\Users\\mehme")
-import os
-API_KEY = os.environ.get("API_KEY")
-SEHIR = os.environ.get("SEHIR")
-GROQ_KEY = os.environ.get("GROQ_API_KEY")
 from groq import Groq
 
 app = Flask(__name__)
 app.secret_key = "jarvis_gizli_anahtar_2024"
+
+API_KEY = os.environ.get("API_KEY", "5ab012c8fd1875d8330b951e11556c56")
+SEHIR = os.environ.get("SEHIR", "Istanbul")
+GROQ_KEY = os.environ.get("GROQ_API_KEY", "gsk_keyin")
+
 groq_client = Groq(api_key=GROQ_KEY)
 
 KULLANICILAR_DOSYA = "kullanicilar.json"
@@ -44,7 +43,7 @@ def jarvis_ai(mesajlar, soru):
     cevap = groq_client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages=[
-            {"role": "system", "content": "Sen JARVIS adında bir yapay zeka asistansın. Türkçe konuşuyorsun. Net ve efendice cevap veriyorsun. Kullanıcına 'efendim' diye hitap ediyorsun."}
+            {"role": "system", "content": "Sen J.A.R.V.I.S. 1453 adında bir yapay zeka asistansın. Seni Mehmet Şükrü Sevinç geliştirdi. Türkçe konuşuyorsun. Net ve efendice cevap veriyorsun. Kullanıcına 'efendim' diye hitap ediyorsun."}
         ] + mesajlar,
         max_tokens=500
     )
