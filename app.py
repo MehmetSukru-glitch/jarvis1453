@@ -121,20 +121,22 @@ def giris():
 def kayit():
     veri = request.json
     kullanici_adi = veri.get("kullanici_adi")
+    email = veri.get("email")
     sifre = veri.get("sifre")
     kullanicilar = kullanicilari_yukle()
+    for k, v in kullanicilar.items():
+        if v.get("email") == email:
+            return jsonify({"ok": False, "mesaj": "Bu email zaten kayıtlı!"})
     if kullanici_adi in kullanicilar:
         return jsonify({"ok": False, "mesaj": "Bu kullanıcı adı zaten alınmış!"})
-    kullanicilar[kullanici_adi] = {"sifre": generate_password_hash(sifre)}
+    kullanicilar[kullanici_adi] = {
+        "sifre": generate_password_hash(sifre),
+        "email": email
+    }
     kullanicilari_kaydet(kullanicilar)
+    session.permanent = True
     session["kullanici"] = kullanici_adi
     return jsonify({"ok": True})
-
-@app.route("/cikis")
-def cikis():
-    session.pop("kullanici", None)
-    return redirect(url_for("giris"))
-
 @app.route("/sohbetler", methods=["GET"])
 def sohbetleri_getir():
     if "kullanici" not in session:

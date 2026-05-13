@@ -34,12 +34,13 @@
             <div class="sekme" onclick="sekmeAc('kayit')">KAYIT OL</div>
         </div>
         <div id="giris-form">
-            <input type="text" id="giris-kullanici" placeholder="Kullanıcı adı">
+            <input type="text" id="giris-kullanici" placeholder="Kullanıcı adı veya email">
             <input type="password" id="giris-sifre" placeholder="Şifre" onkeypress="enterKontrol(event, 'giris')">
             <button onclick="girisYap()">SİSTEME GİR</button>
         </div>
         <div id="kayit-form" style="display:none">
             <input type="text" id="kayit-kullanici" placeholder="Kullanıcı adı">
+            <input type="email" id="kayit-email" placeholder="Email adresi">
             <input type="password" id="kayit-sifre" placeholder="Şifre" onkeypress="enterKontrol(event, 'kayit')">
             <button onclick="kayitOl()">HESAP OLUŞTUR</button>
         </div>
@@ -67,12 +68,13 @@
         }
         async function kayitOl() {
             const kullanici_adi = document.getElementById('kayit-kullanici').value.trim();
+            const email = document.getElementById('kayit-email').value.trim();
             const sifre = document.getElementById('kayit-sifre').value;
-            if (!kullanici_adi || !sifre) { document.getElementById('hata').textContent = 'Tüm alanları doldurun!'; return; }
+            if (!kullanici_adi || !email || !sifre) { document.getElementById('hata').textContent = 'Tüm alanları doldurun!'; return; }
             const res = await fetch('/kayit', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({kullanici_adi, sifre})
+                body: JSON.stringify({kullanici_adi, email, sifre})
             });
             const veri = await res.json();
             if (veri.ok) { window.location.href = '/'; }
