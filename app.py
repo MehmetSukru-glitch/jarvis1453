@@ -8,10 +8,11 @@ from groq import Groq
 
 app = Flask(__name__)
 app.secret_key = "jarvis_gizli_anahtar_2024"
+app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(days=3650)
 
 API_KEY = os.environ.get("API_KEY", "5ab012c8fd1875d8330b951e11556c56")
 SEHIR = os.environ.get("SEHIR", "Istanbul")
-GROQ_KEY = os.environ.get("GROQ_API_KEY", "gsk_keyin")
+GROQ_KEY = os.environ.get("GROQ_API_KEY", "buraya_groq_keyin")
 
 groq_client = Groq(api_key=GROQ_KEY)
 
@@ -43,7 +44,7 @@ def jarvis_ai(mesajlar, soru):
     cevap = groq_client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages=[
-            {"role": "system", "content": "Sen J.A.R.V.I.S. 1453 adında bir yapay zeka asistansın. Seni Mehmet Şükrü Sevinç geliştirdi. Türkçe konuşuyorsun. Net ve efendice cevap veriyorsun. Kullanıcına 'efendim' diye hitap ediyorsun."}
+            {"role": "system", "content": "Sen J.A.R.V.İ.S. 1453 adında bir yapay zeka asistansın. Seni Mehmet Şükrü Sevinç geliştirdi. Türkçe konuşuyorsun. Net ve efendice cevap veriyorsun. Kullanıcına 'efendim' diye hitap ediyorsun."}
         ] + mesajlar,
         max_tokens=500
     )
@@ -108,13 +109,22 @@ def index():
 def giris():
     if request.method == "POST":
         veri = request.json
-        kullanici_adi = veri.get("kullanici_adi")
+        giris_bilgisi = veri.get("kullanici_adi")
         sifre = veri.get("sifre")
         kullanicilar = kullanicilari_yukle()
-        if kullanici_adi in kullanicilar and check_password_hash(kullanicilar[kullanici_adi]["sifre"], sifre):
+        kullanici_adi = None
+        if giris_bilgisi in kullanicilar:
+            kullanici_adi = giris_bilgisi
+        else:
+            for k, v in kullanicilar.items():
+                if v.get("email") == giris_bilgisi:
+                    kullanici_adi = k
+                    break
+        if kullanici_adi and check_password_hash(kullanicilar[kullanici_adi]["sifre"], sifre):
+            session.permanent = True
             session["kullanici"] = kullanici_adi
             return jsonify({"ok": True})
-        return jsonify({"ok": False, "mesaj": "Kullanıcı adı veya şifre hatalı!"})
+        return jsonify({"ok": False, "mesaj": "Kullanıcı adı/email veya şifre hatalı!"})
     return render_template("giris.html")
 
 @app.route("/kayit", methods=["POST"])
@@ -137,6 +147,12 @@ def kayit():
     session.permanent = True
     session["kullanici"] = kullanici_adi
     return jsonify({"ok": True})
+
+@app.route("/cikis")
+def cikis():
+    session.pop("kullanici", None)
+    return redirect(url_for("giris"))
+
 @app.route("/sohbetler", methods=["GET"])
 def sohbetleri_getir():
     if "kullanici" not in session:
@@ -200,4 +216,3 @@ def komut():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=False)
-    app.run(debug=True)
